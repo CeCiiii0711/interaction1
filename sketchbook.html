@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Hugging Divs</title>
+  <style>
+    
+  
+          p{
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              font-size: 20px;
+              text-decoration: underline;
+              
+          }
+
+          h1{
+            font-family: archivo;
+            font-size:30px;
+            font-weight: 400;
+          }
+
+          h2{
+            font-family: archivo;
+            font-size:20px;
+            font-weight: 200;
+            
+          }
+
+          h3{
+            font-family: archivo;
+            font-size:20px;
+           
+          }
+
+          a{
+            color:#3b66ff;
+          }
+
+          hr.green {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 155, 3); /* Custom color */
+            margin: 0.5;
+          }
+
+          hr.black {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 0, 0); /* Custom color */
+            margin: 0.5;
+          }
+
+         
+          #selected {
+            background-color: aqua;
+          }
+
+          #text-color{
+            color:rgb(0, 155, 3);
+          }
+
+    body, html {
+      cursor: url('eye.jpg'), auto; /* Custom image cursor */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: rgb(255, 255, 255);
+    }
+
+    button{
+      margin-top:30px;
+      width:200px;
+      border:soild,1px,black;
+      border-radius: 20px;
+      padding:20px;
+      background-color: rgb(211, 211, 211); 
+    }
+
+    button.hover {
+      background-color: orangered;
+    }
+
+   
+
+    .viewport-div {
+      position: fixed; /* Stick to viewport */
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25px; /* Adjust as needed */
+      background: rgb(0, 189, 3); /* Primary color */
+      font-family: roboto condensed;
+    }
+
+    
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure it fills the viewport */
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      margin-top: 20px;
+      padding:10px;
+      padding-bottom:30px;
+      display: flex;
+      flex-direction: row;
+      gap: 4%;
+      
+    }
+
+              .description {
+                color:(0,155,3);
+                width:100%;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 15px;
+              }
+              
+
+    .index {
+      position: sticky; /* Enables sticky behavior */
+      top: 20px; /* The element will stick to the top of the viewport */
+      background-color: white;
+      z-index: 1000;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+      width:100%;
+      
+    }
+                .tab {
+              position: relative; /* Key fix to ensure dropdown is positioned relative to tab */
+              flex: 1 1 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 8px;
+              border-bottom: 1.5px solid rgb(0, 155, 0);
+              border-top: 1.5px solid rgb(0, 155, 0);
+              font-family: archivo;
+              color: rgb(0, 155, 3);
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .tab:hover {
+              background-color: aqua;
+            }
+
+            /* Dropdown menu hidden by default */
+            .dropdown {
+              display: none; /* Hide dropdown initially */
+              position: absolute; /* Position relative to tab */
+              top: 100%; /* Position directly below the tab */
+              left: 0;
+              background-color: rgb(255, 255, 255); /* Dropdown background */
+
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+
+
+              list-style: none; /* Remove bullets */
+              padding: 8px;
+              margin: 0;
+              z-index: 1000; /* Ensure it appears above other content */
+              width: 200px; /* Adjust width */
+              text-align: center;
+            }
+
+            .dropdown li {
+              padding: 5px;
+            }
+
+            .dropdown li a {
+              text-decoration: none;
+              color: rgb(0, 0, 0);
+              display: block;
+            }
+
+            .dropdown li:hover {
+              background-color:rgb(203, 203, 203);
+            }
+
+            /* Show dropdown on hover */
+            .tab:hover .dropdown {
+              display: block; /* Reveals the dropdown */
+            }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+     
+      margin-left:20%;
+      margin-right:20%;
+      margin-top:20px;
+      margin-top:40px;
+      padding-bottom:100px;
+      gap:4%;
+      background-color: #ffffff;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:row;
+      gap:15%;
+
+    }
+
+
+
+        .sidebar {
+                  width:40%;
+                  height:100%;
+                 display:flex;
+                  flex-direction: column;
+
+                }
+
+            .right{
+              width:60%;
+              height:100%;
+              display:flex;
+              flex-direction: column;
+            }
+
+
+    .book { 
+                background-color: #fff;
+                width: 800px; /* Spread width: two pages of 300px each */
+                height: 600px;
+                perspective: 1000px;
+                cursor:pointer;
+                
+            }
+
+                    .spread {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        transform-origin: center;
+                        backface-visibility: hidden;
+                        transition: transform 1s ease;
+                    }
+                    .page {
+                      width: 50%; /* Ensures it takes half of the .spread width */
+                      height: 100%; /* Matches the height of the .spread */
+                      background-size: cover; /* Ensures the image scales to fit */
+                      background-position: center; /* Centers the image */
+                      background-repeat: no-repeat; /* Prevents tiling of the image */
+}
+
+                    /* Left Page */
+                    .page.left {
+                        width: 50%;
+                        height: 100%;
+                        border-right:1px solid#e1dfdf;
+                        border-bottom:3px solid #474242;
+                        box-shadow: 5px 5px 15px rgba(0, 155, 3, 0.5); /* Drop shadow */
+                    }
+
+                    /* Right Page */
+                    .page.right {
+                        width: 50%;
+                        height: 100%;
+                        border-right: 3px solid #8d8686;
+                        border-bottom:3px solid #474242;
+                        box-shadow: 5px 5px 15px rgba(0, 155, 3, 0.5); /* Drop shadow */
+                    }
+
+                    /* Flipped spreads */
+                    .spread.flipped {
+                        transform: rotateY(-180deg);
+                    }
+
+                    /* Position spreads */
+                    .spread:nth-child(1) {
+                        z-index: 7;
+                    }
+                    .spread:nth-child(2) {
+                        z-index: 6;
+                    }
+                    .spread:nth-child(3) {
+                        z-index: 5;
+                    }
+                    .spread:nth-child(4) {
+                        z-index: 4;
+                    }
+                    .spread:nth-child(5) {
+                        z-index: 3;
+                    }
+                    .spread:nth-child(6) {
+                        z-index: 2;
+                    }
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport-div top"> @CeCiiii_Designlab/ @CeCiiii_Studio/ @CeCiiii/ since 2023 </div>
+
+<div class="body">
+      <div class="header">
+        <div class="description" id="text-color">
+        
+          Untypical NewYorker is a collection of experimental art and design projects around my life and observations in NYC. 
+          Starting August 2023, since the very first moment when I stepped into this ground with infinite passion, scents, and unpredictableness, 
+          What is a NewYorker? 
+          They told me that a NewYorker should jay-walk; 
+          a NewYorker should laying on the meadow of central park;
+           a NewYorker should be an expert in the most complex subway system in the world.
+           I have been trying to find a way of living thats both "me" and "newyork" and this is how i've landed ✨website designed and coded @CeCiiii_Designlab ✨projects @CeCiiii_Studio
+              <a href="home.html">back to homepage</a>
+         
+        </div>
+      </div>
+
+      <div class="index">
+        <div class="tab" id="selected">
+          UNION SQUARE
+          <ul class="dropdown">
+            <li><a href="sketcbook.html" id="selected">📓    field note </a></li>
+            <li><a href="sticker.html"> ✂️    sticker </a></li>
+            <li><a href="photography.html">📷    photography</a></li>
+          </ul>
+        
+        </div>
+        <div class="tab" >NYC SUBWAY
+            <ul class="dropdown">
+              <li><a href="portraits.html"> 🖊️ subway portraits </a></li>
+              <li><a href="map.html"> 🌈 let the map grow </a></li>
+            </ul>
+          </div>
+
+        <div class="tab" data-link="2cooksome.html">2COOKSOME</div>
+        <div class="tab" data-link="photozine.html">2023-2024 Photo Zine</div>
+        <div class="tab" data-link="808.html">KERRY 808 GALLERY</div>
+        <div class="tab" data-link="self-intro.html">to be continued.....</div>
+      </div>
+  
+      <div class="content"> 
+        <div class="project">
+
+        <div class="sidebar" >
+          <h1>UNION SQUARE <br> Field Notes</h1>     
+        </div>
+        <div class="right" >
+         
+          <h2>⌚️  Time: 2024 Spring<br>
+            🌲   Material: sketchbook, black pen, sumi brush, parchment paper, charchol, pencil </h2>
+
+          </div>
+        </div>
+        
+        
+        <div class="book">
+          <!-- Spread 1 -->
+      <div class="spread">
+        <div class="page left" style="background-image: url('1.jpg')"></div>
+        <div class="page right" style="background-image: url('2.jpg')"></div>
+        
+    </div>
+
+    <!-- Spread 2 -->
+    <div class="spread">
+        <div class="page left" style="background-image: url('3.jpg')"></div>
+        <div class="page right" style="background-image: url('4.jpg')"></div>
+    </div>
+
+    <!-- Spread 3 -->
+    <div class="spread">
+        <div class="page left" style="background-image: url('5.jpg')"></div>
+        <div class="page right" style="background-image: url('6.jpg')"></div>
+    </div>
+
+    <!-- Spread 4 -->
+    <div class="spread">
+        <div class="page left" style="background-image: url('7.jpg')"></div>
+        <div class="page right" style="background-image: url('8.jpg')"></div>
+    </div>
+
+      <!-- Spread 5 -->
+      <div class="spread">
+        <div class="page left" style="background-image: url('9.jpg')"></div>
+        <div class="page right" style="background-image: url('10.jpg')"></div>
+    </div>
+
+      <!-- Spread 6 -->
+      <div class="spread">
+        <div class="page left" style="background-image: url('11.jpg')"></div>
+        <div class="page right" style="background-image: url('12.jpg')"></div>
+    </div>
+    <button id="refreshButton">start agaiiiiin</button>
+    </div> 
+ 
+      
+    </div>
+
+
+
+    
+
+  </div>
+</body>
+
+<script>
+
+// Handle direct tab clicks for tabs without dropdowns
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+// Select all spreads
+const spreads = document.querySelectorAll('.spread');
+
+// Track the currently flipped spread
+let currentSpread = 0;
+
+// Add click event listener for flipping
+spreads.forEach((spread, index) => {
+    spread.addEventListener('click', () => {
+        // Flip the current spread
+        if (index === currentSpread) {
+            spread.classList.add('flipped');
+            currentSpread++;
+        }
+        // Optionally flip back if clicking a flipped spread
+        else if (index === currentSpread - 1) {
+            spread.classList.remove('flipped');
+            currentSpread--;
+        }
+    });
+});
+
+// Add a click event listener to the button
+document.getElementById('refreshButton').addEventListener('click', function() {
+      location.reload(); // Refresh the page
+    });
+         
+</script>
+
+</html>

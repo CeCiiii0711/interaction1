@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Hugging Divs</title>
+  <style>
+    
+  
+          p{
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              font-size: 20px;
+              text-decoration: underline;
+              
+          }
+
+          h1{
+            font-family: archivo;
+            font-size:30px;
+            font-weight: 400;
+          }
+
+          h2{
+            font-family: archivo;
+            font-size:20px;
+            font-weight: 200;
+            
+          }
+
+          h3{
+            font-family: archivo;
+            font-size:20px;
+           
+          }
+
+          a{
+            color:#3b66ff;
+          }
+
+          hr.green {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 155, 3); /* Custom color */
+            margin: 0.5;
+          }
+
+          hr.black {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 0, 0); /* Custom color */
+            margin: 0.5;
+          }
+
+         
+          #selected {
+            background-color: aqua;
+          }
+
+          #text-color{
+            color:rgb(0, 155, 3);
+          }
+
+    body, html {
+      cursor: url('eye.jpg'), auto; /* Custom image cursor */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: rgb(255, 255, 255);
+    }
+
+    button{
+      margin-top:30px;
+      width:200px;
+      border:soild,1px,black;
+      border-radius: 20px;
+      padding:20px;
+      background-color: rgb(211, 211, 211); 
+    }
+
+    button.hover {
+      background-color: orangered;
+    }
+
+   
+
+    .viewport-div {
+      position: fixed; /* Stick to viewport */
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25px; /* Adjust as needed */
+      background: rgb(0, 189, 3); /* Primary color */
+      font-family: roboto condensed;
+    }
+
+    
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure it fills the viewport */
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      margin-top: 20px;
+      padding:10px;
+      padding-bottom:30px;
+      display: flex;
+      flex-direction: row;
+      gap: 4%;
+      
+    }
+
+              .description {
+                color:(0,155,3);
+                width:100%;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 15px;
+              }
+              
+
+    .index {
+      position: sticky; /* Enables sticky behavior */
+      top: 20px; /* The element will stick to the top of the viewport */
+      background-color: white;
+      z-index: 1000;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+      width:100%;
+      
+    }
+                .tab {
+              position: relative; /* Key fix to ensure dropdown is positioned relative to tab */
+              flex: 1 1 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 8px;
+              border-bottom: 1.5px solid rgb(0, 155, 0);
+              border-top: 1.5px solid rgb(0, 155, 0);
+              font-family: archivo;
+              color: rgb(0, 155, 3);
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .tab:hover {
+              background-color: aqua;
+            }
+
+            /* Dropdown menu hidden by default */
+            .dropdown {
+              display: none; /* Hide dropdown initially */
+              position: absolute; /* Position relative to tab */
+              top: 100%; /* Position directly below the tab */
+              left: 0;
+              background-color: rgb(255, 255, 255); /* Dropdown background */
+
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+
+
+              list-style: none; /* Remove bullets */
+              padding: 8px;
+              margin: 0;
+              z-index: 1000; /* Ensure it appears above other content */
+              width: 200px; /* Adjust width */
+              text-align: center;
+            }
+
+            .dropdown li {
+              padding: 5px;
+            }
+
+            .dropdown li a {
+              text-decoration: none;
+              color: rgb(0, 0, 0);
+              display: block;
+            }
+
+            .dropdown li:hover {
+              background-color:rgb(203, 203, 203);
+            }
+
+            /* Show dropdown on hover */
+            .tab:hover .dropdown {
+              display: block; /* Reveals the dropdown */
+            }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+     
+      margin-left:10%;
+      margin-right:10%;
+      margin-top:20px;
+      margin-top:40px;
+      padding-bottom:100px;
+      gap:4%;
+      background-color: #ffffff;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:row;
+      gap:15%;
+
+    }
+
+
+
+        .sidebar {
+                  width:40%;
+                  height:100%;
+                 display:flex;
+                  flex-direction: column;
+
+                }
+
+            .right{
+              width:60%;
+              height:100%;
+              display:flex;
+              flex-direction: column;
+            }
+
+            .stickers{
+              width:100%;
+              padding-bottom: 200px;
+              display:flex;
+              flex-direction:row;
+              flex-wrap:wrap;  
+              gap:20px;
+                   
+            }
+       
+            .sticker{
+              width:200px;
+              object-fit:contain;
+
+            }
+
+            .sticker:hover {
+              filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* Thicker but slightly blurred outline */
+            
+              transform: scale(2);
+
+}
+          
+    
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport-div top"> @CeCiiii_Designlab/ @CeCiiii_Studio/ @CeCiiii/ since 2023 </div>
+
+<div class="body">
+      <div class="header">
+        <div class="description" id="text-color">
+        
+          Untypical NewYorker is a collection of experimental art and design projects around my life and observations in NYC. 
+          Starting August 2023, since the very first moment when I stepped into this ground with infinite passion, scents, and unpredictableness, 
+          What is a NewYorker? 
+          They told me that a NewYorker should jay-walk; 
+          a NewYorker should laying on the meadow of central park;
+           a NewYorker should be an expert in the most complex subway system in the world.
+           I have been trying to find a way of living thats both "me" and "newyork" and this is how i've landed ✨website designed and coded @CeCiiii_Designlab ✨projects @CeCiiii_Studio
+              <a href="home.html">back to homepage</a>
+         
+        </div>
+      </div>
+
+      <div class="index">
+        <div class="tab" >
+          UNION SQUARE
+          <ul class="dropdown">
+            <li><a href="sketchbook.html" >📓    field note </a></li>
+            <li><a href="sticker.html"> ✂️    sticker </a></li>
+            <li><a href="photography.html">📷    photography</a></li>
+          </ul>
+        
+        </div>
+        <div class="tab" id="selected">NYC SUBWAY
+            <ul class="dropdown">
+              <li><a href="portraits.html" id="selected"> 🖊️ subway portraits </a></li>
+              <li><a href="map.html"> 🌈 let the map grow </a></li>
+            </ul>
+          </div>
+
+        <div class="tab" data-link="2cooksome.html">2COOKSOME</div>
+        <div class="tab" data-link="photozine.html" >2023-2024 Photo Zine</div>
+        <div class="tab" data-link="808.html">KERRY 808 GALLERY</div>
+        <div class="tab" data-link="self-intro.html">to be continued.....</div>
+      </div>
+  
+      <div class="content"> 
+        <div class="project">
+
+        <div class="sidebar" >
+          <h1>Subway Portraits</h1> 
+    
+
+        
+        </div>
+        <div class="right" >
+          <h2>
+            ⭕️   Part of "Let the Map Grow" social and design project <br>
+            🍃  Time: 2023 Novenber --- December<br>
+            🔥   Material: boldness, self-made postcard, sharpie <br>
+        
+
+          </div>
+        </div>
+
+        <div class="stickers">
+
+              <!-- Photos -->
+              <img src="sketches/1.JPG" alt="Photo 1" class="sticker">
+              <img src="sketches/2.JPG" alt="Photo 2" class="sticker">
+              <img src="sketches/3.JPG" alt="Photo 3" class="sticker">
+              <img src="sketches/4.JPG" alt="Photo 4" class="sticker">
+              <img src="sketches/5.JPG" alt="Photo 5" class="sticker">
+              <img src="sketches/6.JPG" alt="Photo 6" class="sticker">
+              <img src="sketches/7.JPG" alt="Photo 7" class="sticker">
+              <img src="sketches/8.JPG" alt="Photo 8" class="sticker">
+              <img src="sketches/9.JPG" alt="Photo 9" class="sticker">
+              <img src="sketches/10.JPG" alt="Photo 10" class="sticker">
+              <img src="sketches/11.JPG" alt="Photo 11" class="sticker">
+              <img src="sketches/12.JPG" alt="Photo 12" class="sticker">
+              <img src="sketches/13.JPG" alt="Photo 13" class="sticker">
+              <img src="sketches/14.JPG" alt="Photo 14" class="sticker">
+              <img src="sketches/15.JPG" alt="Photo 15" class="sticker">
+              <img src="sketches/16.JPG" alt="Photo 16" class="sticker">
+              <img src="sketches/17.JPG" alt="Photo 17" class="sticker">
+              <img src="sketches/18.JPG" alt="Photo 18" class="sticker">
+              <img src="sketches/19.JPG" alt="Photo 19" class="sticker">
+              <img src="sketches/20.JPG" alt="Photo 20" class="sticker">
+              <img src="sketches/21.JPG" alt="Photo 21" class="sticker">
+              <img src="sketches/22.JPG" alt="Photo 22" class="sticker">
+              <img src="sketches/23.JPG" alt="Photo 23" class="sticker">
+              <img src="sketches/24.JPG" alt="Photo 24" class="sticker">
+              <img src="sketches/25.JPG" alt="Photo 25" class="sticker">
+              <img src="sketches/26.JPG" alt="Photo 26" class="sticker">
+              <img src="sketches/27.JPG" alt="Photo 27" class="sticker">
+              <img src="sketches/28.JPG" alt="Photo 28" class="sticker">
+              <img src="sketches/29.JPG" alt="Photo 29" class="sticker">
+              <img src="sketches/30.JPG" alt="Photo 30" class="sticker">
+              <img src="sketches/31.JPG" alt="Photo 31" class="sticker">
+              <img src="sketches/32.JPG" alt="Photo 32" class="sticker">
+              <img src="sketches/33.JPG" alt="Photo 33" class="sticker">
+              <img src="sketches/34.JPG" alt="Photo 34" class="sticker">
+              <img src="sketches/35.JPG" alt="Photo 35" class="sticker">
+              <img src="sketches/36.JPG" alt="Photo 36" class="sticker">
+              <img src="sketches/37.JPG" alt="Photo 37" class="sticker">
+              <img src="sketches/38.JPG" alt="Photo 38" class="sticker">
+              <img src="sketches/39.JPG" alt="Photo 39" class="sticker">
+              <img src="sketches/40.JPG" alt="Photo 40" class="sticker">
+            </div>
+            
+
+
+          </div>
+      
+        </div>
+
+
+ 
+          
+      
+  
+        
+        
+
+
+    </div> 
+ 
+      
+    </div>
+
+
+
+    
+
+  </div>
+</body>
+
+<script>
+
+// Handle direct tab clicks for tabs without dropdowns
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+// Select all spreads
+const spreads = document.querySelectorAll('.spread');
+
+// Track the currently flipped spread
+let currentSpread = 0;
+
+// Add click event listener for flipping
+spreads.forEach((spread, index) => {
+    spread.addEventListener('click', () => {
+        // Flip the current spread
+        if (index === currentSpread) {
+            spread.classList.add('flipped');
+            currentSpread++;
+        }
+        // Optionally flip back if clicking a flipped spread
+        else if (index === currentSpread - 1) {
+            spread.classList.remove('flipped');
+            currentSpread--;
+        }
+    });
+});
+
+// Add a click event listener to the button
+document.getElementById('refreshButton').addEventListener('click', function() {
+      location.reload(); // Refresh the page
+    });
+         
+</script>
+
+</html>

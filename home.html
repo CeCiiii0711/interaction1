@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Hugging Divs</title>
+  <style>
+    
+  
+          p{
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              font-size: 20px;
+              text-decoration: underline;
+              
+          }
+
+          #main {
+            font-family: archivo;
+            font-size:20px;
+            color: rgb(0, 155, 3);
+            font-weight: 400;
+
+          }
+
+          hr.green {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 155, 3); /* Custom color */
+            margin: 0.5;
+          }
+
+          hr.black {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 0, 0); /* Custom color */
+            margin: 0.5;
+          }
+
+          #text-color {
+            color: rgb(0, 0, 0);
+          }
+
+          #selected {
+            background-color: aqua;
+          }
+
+    body, html {
+      cursor: url('eye.jpg'), auto; /* Custom image cursor */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    
+      background-color: rgb(255, 255, 255);
+    }
+
+    .viewport-div {
+      position: fixed; /* Stick to viewport */
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25px; /* Adjust as needed */
+      background: rgb(0, 189, 3); /* Primary color */
+      font-family: roboto condensed;
+    }
+
+    
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure it fills the viewport */
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      margin-top: 20px;
+      padding:5%;
+      padding-top:30px;
+      display: flex;
+      flex-direction: row;
+      gap: 4%;
+      
+    }
+
+              .title {
+                width:40%;
+                font-family: helvetica;
+                font-size: 50px;
+                font-family: archivo;
+                font-weight: 500;
+                
+            
+              }
+
+              .description {
+                width:100%;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 20px;
+              }
+              
+
+    .index {
+      position: sticky; /* Enables sticky behavior */
+      top: 20px; /* The element will stick to the top of the viewport */
+      background-color: white;
+      z-index: 1000;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+      width:100%;
+      
+    }
+                .tab {
+              position: relative; /* Key fix to ensure dropdown is positioned relative to tab */
+              flex: 1 1 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 8px;
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+              font-family: archivo;
+              color: rgb(0, 155, 3);
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .tab:hover {
+              background-color: aqua;
+            }
+
+            /* Dropdown menu hidden by default */
+            .dropdown {
+              display: none; /* Hide dropdown initially */
+              position: absolute; /* Position relative to tab */
+              top: 100%; /* Position directly below the tab */
+              left: 0;
+              background-color: rgb(255, 255, 255); /* Dropdown background */
+
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+
+
+              list-style: none; /* Remove bullets */
+              padding: 8px;
+              margin: 0;
+              z-index: 1000; /* Ensure it appears above other content */
+              width: 200px; /* Adjust width */
+              text-align: center;
+            }
+
+            .dropdown li {
+              padding: 5px;
+            }
+
+            .dropdown li a {
+              text-decoration: none;
+              color: rgb(0, 0, 0);
+              display: block;
+            }
+
+            .dropdown li:hover {
+              background-color:rgb(203, 203, 203);
+            }
+
+            /* Show dropdown on hover */
+            .tab:hover .dropdown {
+              display: block; /* Reveals the dropdown */
+            }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+      width:100%;
+      padding:0;
+      gap:4%;
+    }
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport-div top"> @CeCiiii_Designlab/ @CeCiiii_Studio/ @CeCiiii/ since 2023 </div>
+
+<div class="body">
+      <div class="header">
+
+        <div class="title" id="text-color">
+          untypical <br>newyorker 
+  
+        
+        </div>
+        <div class="image"> </div> 
+
+        
+        <div class="description" id="text-color">
+        
+          Untypical NewYorker is a collection of experimental art and design projects around my life and observations in NYC. 
+          Starting August 2023, since the very first moment when I stepped into this ground with infinite passion, scents, and unpredictableness, 
+          I have been trying to find a way of living thats both "me" and "newyork".
+
+          <br>
+          <br>
+
+          📟   website designed and coded @CeCiiii_Designlab 
+          <br>🎞️   projects @CeCiiii_Studio
+        
+         
+        </div>
+      </div>
+
+      <div class="index">
+        <div class="tab">
+          UNION SQUARE
+          <ul class="dropdown">
+            <li><a href="sketchbook.html">📓    field note </a></li>
+            <li><a href="sticker.html"> ✂️    sticker </a></li>
+            <li><a href="photography.html">📷    photography</a></li>
+          </ul>
+        
+        </div>
+        <div class="tab" >NYC SUBWAY
+            <ul class="dropdown">
+              <li><a href="portraits.html"> 🖊️ subway portraits </a></li>
+              <li><a href="map.html"> 🌈 let the map grow </a></li>
+            </ul>
+          </div>
+
+        <div class="tab" data-link="2cooksome.html">2COOKSOME</div>
+        <div class="tab" data-link="photozine.html">2023-2024 Photo Zine</div>
+        <div class="tab" data-link="808.html">KERRY 808 GALLERY</div>
+        <div class="tab" data-link="self-intro.html">to be continued.....</div>
+      </div>
+  
+      <div class="content"> 
+        <img src="eye.jpg">
+
+
+
+      </div>
+
+    
+
+  </div>
+</body>
+
+<script>
+
+// Handle direct tab clicks for tabs without dropdowns
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+         
+</script>
+
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Hugging Divs</title>
+  <style>
+    
+  
+          p{
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              font-size: 20px;
+              text-decoration: underline;
+              
+          }
+
+          h1{
+            font-family: archivo;
+            font-size:30px;
+            font-weight: 400;
+          }
+
+          h2{
+            font-family: archivo;
+            font-size:20px;
+            font-weight: 200;
+            
+          }
+
+          h3{
+            font-family: archivo;
+            font-size:20px;
+           
+          }
+
+          a{
+            color:#3b66ff;
+          }
+
+          hr.green {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 155, 3); /* Custom color */
+            margin: 0.5;
+          }
+
+          hr.black {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 0, 0); /* Custom color */
+            margin: 0.5;
+          }
+
+         
+          #selected {
+            background-color: aqua;
+          }
+
+          #text-color{
+            color:rgb(0, 155, 3);
+          }
+
+    body, html {
+      cursor: url('eye.jpg'), auto; /* Custom image cursor */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: rgb(255, 255, 255);
+    }
+
+    button{
+      margin-top:30px;
+      width:200px;
+      border:soild,1px,black;
+      border-radius: 20px;
+      padding:20px;
+      background-color: rgb(211, 211, 211); 
+    }
+
+    button.hover {
+      background-color: orangered;
+    }
+
+   
+
+    .viewport-div {
+      position: fixed; /* Stick to viewport */
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25px; /* Adjust as needed */
+      background: rgb(0, 189, 3); /* Primary color */
+      font-family: roboto condensed;
+    }
+
+    
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure it fills the viewport */
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      margin-top: 20px;
+      padding:10px;
+      padding-bottom:30px;
+      display: flex;
+      flex-direction: row;
+      gap: 4%;
+      
+    }
+
+              .description {
+                color:(0,155,3);
+                width:100%;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 15px;
+              }
+              
+
+    .index {
+      position: sticky; /* Enables sticky behavior */
+      top: 20px; /* The element will stick to the top of the viewport */
+      background-color: white;
+      z-index: 1000;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+      width:100%;
+      
+    }
+                .tab {
+              position: relative; /* Key fix to ensure dropdown is positioned relative to tab */
+              flex: 1 1 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 8px;
+              border-bottom: 1.5px solid rgb(0, 155, 0);
+              border-top: 1.5px solid rgb(0, 155, 0);
+              font-family: archivo;
+              color: rgb(0, 155, 3);
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .tab:hover {
+              background-color: aqua;
+            }
+
+            /* Dropdown menu hidden by default */
+            .dropdown {
+              display: none; /* Hide dropdown initially */
+              position: absolute; /* Position relative to tab */
+              top: 100%; /* Position directly below the tab */
+              left: 0;
+              background-color: rgb(255, 255, 255); /* Dropdown background */
+
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+
+
+              list-style: none; /* Remove bullets */
+              padding: 8px;
+              margin: 0;
+              z-index: 1000; /* Ensure it appears above other content */
+              width: 200px; /* Adjust width */
+              text-align: center;
+            }
+
+            .dropdown li {
+              padding: 5px;
+            }
+
+            .dropdown li a {
+              text-decoration: none;
+              color: rgb(0, 0, 0);
+              display: block;
+            }
+
+            .dropdown li:hover {
+              background-color:rgb(203, 203, 203);
+            }
+
+            /* Show dropdown on hover */
+            .tab:hover .dropdown {
+              display: block; /* Reveals the dropdown */
+            }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+     
+      margin-left:10%;
+      margin-right:10%;
+      margin-top:20px;
+      margin-top:40px;
+      padding-bottom:100px;
+      gap:4%;
+      background-color: #ffffff;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:row;
+      gap:15%;
+
+    }
+
+
+
+        .sidebar {
+                  width:40%;
+                  height:100%;
+                 display:flex;
+                  flex-direction: column;
+
+                }
+
+            .right{
+              width:60%;
+              height:100%;
+              display:flex;
+              flex-direction: column;
+            }
+
+           .objectContainer {
+            width:100%;
+           }
+
+
+            #objectContainer img {
+    max-height: 200px; /* Ensures images scale down on small screens */
+    margin: 10px; /* Adds spacing between images */
+    display: inline-block; /* Prevents overlap or alignment issues */
+}
+
+
+       
+        #typeFilter {
+          padding:10px;
+          border-radius: 20px;
+          font-family: archivo;
+          font-size: 20px;
+        }
+
+        /* Styles for the overlay */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Make sure it appears above other elements */
+}
+
+/* Centered image in the overlay */
+#overlay img {
+    max-width: 90%;
+    max-height: 90%; /* Ensures the image fits within the viewport */
+    object-fit: contain; /* Ensures proper scaling */
+}
+
+
+
+
+
+          
+    
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport-div top"> @CeCiiii_Designlab/ @CeCiiii_Studio/ @CeCiiii/ since 2023 </div>
+
+<div class="body">
+      <div class="header">
+        <div class="description" id="text-color">
+        
+          Untypical NewYorker is a collection of experimental art and design projects around my life and observations in NYC. 
+          Starting August 2023, since the very first moment when I stepped into this ground with infinite passion, scents, and unpredictableness, 
+          What is a NewYorker? 
+          They told me that a NewYorker should jay-walk; 
+          a NewYorker should laying on the meadow of central park;
+           a NewYorker should be an expert in the most complex subway system in the world.
+           I have been trying to find a way of living thats both "me" and "newyork" and this is how i've landed ✨website designed and coded @CeCiiii_Designlab ✨projects @CeCiiii_Studio
+              <a href="home.html">back to homepage</a>
+         
+        </div>
+      </div>
+
+      <div class="index">
+        <div class="tab" id="selected">
+          UNION SQUARE
+          <ul class="dropdown">
+            <li><a href="sketchbook.html" >📓    field note </a></li>
+            <li><a href="sticker.html"> ✂️    sticker </a></li>
+            <li><a href="photography.html" id="selected">📷    photography</a></li>
+          </ul>
+        
+        </div>
+        <div class="tab" >NYC SUBWAY
+            <ul class="dropdown">
+              <li><a href="portraits.html" > 🖊️ subway portraits </a></li>
+              <li><a href="map.html"> 🌈 let the map grow </a></li>
+            </ul>
+          </div>
+
+        <div class="tab" data-link="2cooksome.html">2COOKSOME</div>
+        <div class="tab" data-link="photozine.html" >2023-2024 Photo Zine</div>
+        <div class="tab" data-link="808.html">KERRY 808 GALLERY</div>
+        <div class="tab" data-link="self-intro.html">to be continued.....</div>
+      </div>
+  
+      <div class="content"> 
+        <div class="project">
+
+        <div class="sidebar" >
+          <h1>Union Square Photography</h1> 
+
+          <select id="typeFilter" onchange="displayObjects()">
+            <option value="all">All</option>
+            <option value="landscape">Landscape</option>
+            <option value="portrait">Portrait</option>
+          </select>
+          
+        
+        </div>
+        <div class="right" >
+          <h2><br><br>
+            ☀️ Time: 2024 March<br>
+            📷   Material: Canon M50, sunlight<br>
+      
+          </div>
+        </div>
+            <!-- Container for images. The js will add them based on the filter selection -->
+          <div id="objectContainer"></div>
+          <div id="overlay">
+            <img src="" alt="Full Screen Preview">
+        </div>
+        
+
+
+
+        </div>
+      
+  </div>
+
+
+
+  </div>
+
+
+<script>
+
+// Handle direct tab clicks for tabs without dropdowns
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+
+
+
+
+    // JSON for our objects
+// Updated objects array
+let objects = [
+    { type: "landscape", image: "photo/1.JPG" },
+    { type: "landscape", image: "photo/2.JPG" },
+    { type: "landscape", image: "photo/3.JPG" },
+    { type: "landscape", image: "photo/4.JPG" },
+    { type: "landscape", image: "photo/5.JPG" },
+    { type: "landscape", image: "photo/6.JPG" },
+    { type: "landscape", image: "photo/7.JPG" },
+    { type: "landscape", image: "photo/8.JPG" },
+    { type: "portrait", image: "photo/a.JPG" },
+    { type: "portrait", image: "photo/b.JPG" },
+    { type: "portrait", image: "photo/c.JPG" },
+    { type: "portrait", image: "photo/d.JPG" },
+    { type: "portrait", image: "photo/e.JPG" },
+    { type: "portrait", image: "photo/f.JPG" },
+];
+
+
+displayObjects(); // Initial call to display all objects
+
+// Function to display objects based on type
+function displayObjects() {
+    let selectedType = document.getElementById('typeFilter').value; // Get the selected type value
+    let container = document.getElementById('objectContainer'); // Reference the container for images
+    container.innerHTML = ''; // Clear the container before displaying new objects
+    
+    // Display all objects if 'all' is selected or match the selected type
+    objects.forEach(obj => {
+        if (selectedType === 'all' || obj.type === selectedType) {
+            let imgElement = document.createElement('img'); // Create a new img element
+            imgElement.src = obj.image; // Set the source of the image
+            container.appendChild(imgElement); // Add the image to the container
+        }
+    });
+}
+
+
+
+// Function to display objects based on type
+function displayObjects() {
+    console.log("Filter function triggered"); // Debug log
+    let selectedType = document.getElementById('typeFilter').value;
+    console.log("Selected type:", selectedType); // Debug log
+
+    let container = document.getElementById('objectContainer');
+    container.innerHTML = '';
+
+    objects.forEach(obj => {
+        console.log("Checking object type:", obj.type); // Debug log
+        if (selectedType === 'all' || obj.type === selectedType) {
+            let imgElement = document.createElement('img');
+            imgElement.src = obj.image;
+            imgElement.style.cursor = 'pointer'; // Add pointer cursor for better UX
+            console.log("Displaying image:", obj.image); // Debug log
+            container.appendChild(imgElement);
+        }
+    });
+
+    // Enable hover preview after adding images
+    enableHoverPreview();
+}
+
+function enableHoverPreview() {
+    const overlay = document.getElementById('overlay');
+    const overlayImage = overlay.querySelector('img');
+    const images = document.querySelectorAll('#objectContainer img');
+
+    images.forEach((img) => {
+        // Show the overlay on hover
+        img.addEventListener('click', () => {
+            overlayImage.src = img.src; // Set the image source to the hovered image
+            overlay.style.display = 'flex'; // Show the overlay
+        });
+    });
+
+    // Add event listener to the overlay to hide it when clicked
+    overlay.addEventListener('click', () => {
+        overlay.style.display = 'none'; // Hide the overlay
+    });
+}
+
+
+
+
+
+
+
+
+         
+</script>
+</body>
+
+</html>

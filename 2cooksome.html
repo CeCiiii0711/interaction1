@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viewport Hugging Divs</title>
+  <style>
+    
+  
+          p{
+              font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+              font-size: 20px;
+              text-decoration: underline;
+              
+          }
+
+          h1{
+            font-family: archivo;
+            font-size:30px;
+            font-weight: 400;
+          }
+
+          h2{
+            font-family: archivo;
+            font-size:20px;
+            font-weight: 200;
+            
+          }
+
+          h3{
+            font-family: archivo;
+            font-size:20px;
+            font-weight: 500;
+           
+          }
+
+          a{
+            color:#3b66ff;
+          }
+
+          hr.green {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 155, 3); /* Custom color */
+            margin: 0.5;
+          }
+
+          hr.black {
+            border: rgb(255, 255, 255);
+            height: 1.5px;
+            background: rgb(0, 0, 0); /* Custom color */
+            margin: 0.5;
+          }
+
+         
+          #selected {
+            background-color: aqua;
+          }
+
+          #text-color{
+            color:rgb(0, 155, 3);
+          }
+
+    body, html {
+      cursor: url('eye.jpg'), auto; /* Custom image cursor */
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: rgb(255, 255, 255);
+    }
+
+    button{
+      margin-top:30px;
+      width:200px;
+      border:soild,1px,black;
+      border-radius: 20px;
+      padding:20px;
+      background-color: rgb(211, 211, 211); 
+    }
+
+    button.hover {
+      background-color: orangered;
+    }
+
+   
+
+    .viewport-div {
+      position: fixed; /* Stick to viewport */
+    }
+
+    .top {
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 25px; /* Adjust as needed */
+      background: rgb(0, 189, 3); /* Primary color */
+      font-family: roboto condensed;
+    }
+
+    
+
+    .body {
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Ensure it fills the viewport */
+    }
+
+    .header {
+      background-color: rgb(255, 255, 255);
+      margin-top: 20px;
+      padding:10px;
+      padding-bottom:30px;
+      display: flex;
+      flex-direction: row;
+      gap: 4%;
+      
+    }
+
+              .description {
+                color:(0,155,3);
+                width:100%;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                font-size: 15px;
+              }
+              
+
+    .index {
+      position: sticky; /* Enables sticky behavior */
+      top: 20px; /* The element will stick to the top of the viewport */
+      background-color: white;
+      z-index: 1000;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content: space-between;
+      width:100%;
+      
+    }
+                .tab {
+              position: relative; /* Key fix to ensure dropdown is positioned relative to tab */
+              flex: 1 1 200px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 8px;
+              border-bottom: 1.5px solid rgb(0, 155, 0);
+              border-top: 1.5px solid rgb(0, 155, 0);
+              font-family: archivo;
+              color: rgb(0, 155, 3);
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            .tab:hover {
+              background-color: aqua;
+            }
+
+            /* Dropdown menu hidden by default */
+            .dropdown {
+              display: none; /* Hide dropdown initially */
+              position: absolute; /* Position relative to tab */
+              top: 100%; /* Position directly below the tab */
+              left: 0;
+              background-color: rgb(255, 255, 255); /* Dropdown background */
+
+              border-bottom: 1.5px solid rgb(0, 0, 0);
+              border-top: 1.5px solid rgb(0, 0, 0);
+
+
+              list-style: none; /* Remove bullets */
+              padding: 8px;
+              margin: 0;
+              z-index: 1000; /* Ensure it appears above other content */
+              width: 200px; /* Adjust width */
+              text-align: center;
+            }
+
+            .dropdown li {
+              padding: 5px;
+            }
+
+            .dropdown li a {
+              text-decoration: none;
+              color: rgb(0, 0, 0);
+              display: block;
+            }
+
+            .dropdown li:hover {
+              background-color:rgb(203, 203, 203);
+            }
+
+            /* Show dropdown on hover */
+            .tab:hover .dropdown {
+              display: block; /* Reveals the dropdown */
+            }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+     
+      margin-left:10%;
+      margin-right:10%;
+      margin-top:40px;
+      padding-bottom:100px;
+      gap:4%;
+      background-color: #ffffff;
+    }
+
+    .project{
+      display:flex;
+      flex-direction:row;
+      gap:15%;
+
+    }
+
+
+
+        .sidebar {
+                  width:40%;
+                  height:100%;
+                 display:flex;
+                  flex-direction: column;
+
+                }
+
+            .right{
+              width:60%;
+              height:100%;
+              display:flex;
+              flex-direction: column;
+            }
+
+            .mode{
+            margin-top:20px;
+            padding:20px;
+            background-color: rgb(230, 230, 230);
+            border-radius: 60px;
+            justify-content: center;
+              align-items: center;
+              text-align: center;
+              filter: drop-shadow(1px 1px 3px rgba(105, 105, 105, 0.8)); 
+              font-family: archivo;
+              font-size:20px;
+              color: rgb(0, 0, 0);
+              font-weight: 500;
+            }
+
+          
+
+          .mode:hover{
+            background-color: orangered;
+            color:white;
+            }
+
+
+
+    
+
+
+
+  </style>
+</head>
+<body>
+  <div class="viewport-div top"> @CeCiiii_Designlab/ @CeCiiii_Studio/ @CeCiiii/ since 2023 </div>
+
+<div class="body">
+      <div class="header">
+        <div class="description" id="text-color">
+        
+          Untypical NewYorker is a collection of experimental art and design projects around my life and observations in NYC. 
+          Starting August 2023, since the very first moment when I stepped into this ground with infinite passion, scents, and unpredictableness, 
+          What is a NewYorker? 
+          They told me that a NewYorker should jay-walk; 
+          a NewYorker should laying on the meadow of central park;
+           a NewYorker should be an expert in the most complex subway system in the world.
+           I have been trying to find a way of living thats both "me" and "newyork" and this is how i've landed ✨website designed and coded @CeCiiii_Designlab ✨projects @CeCiiii_Studio
+              <a href="home.html">back to homepage</a>
+         
+        </div>
+      </div>
+
+      <div class="index">
+        <div class="tab">
+          UNION SQUARE
+          <ul class="dropdown">
+            <li><a href="sketchbook.html" >📓    field note </a></li>
+            <li><a href="sticker.html"> ✂️    sticker </a></li>
+            <li><a href="photography.html">📷    photography</a></li>
+          </ul>
+        
+        </div>
+        <div class="tab" >NYC SUBWAY
+            <ul class="dropdown">
+              <li><a href="portraits.html"> 🖊️ subway portraits </a></li>
+              <li><a href="map.html"> 🌈 let the map grow </a></li>
+            </ul>
+          </div>
+
+        <div class="tab" data-link="2cooksome.html" id="selected">2COOKSOME</div>
+        <div class="tab" data-link="photozine.html">2023-2024 Photo Zine</div>
+        <div class="tab" data-link="808.html">KERRY 808 GALLERY</div>
+        <div class="tab" data-link="self-intro.html">to be continued.....</div>
+      </div>
+  
+      <div class="content"> 
+        <div class="project">
+
+        <div class="sidebar" >
+          <h1>2COOKSOME <br> </h1><br><br>
+          <h3 style="color:orangered"> we just want 2 cook<br> we just have 2 cooks</h3>
+          <a href="https://www.instagram.com/iwant2cook/" target="_blank" rel="noopener noreferrer" class="mode">
+            iwant2cook! 🔥
+          </a>
+          
+        </div>
+          
+        <div class="right" >
+          <h2>🌟   Continuing project initiated by CeCiiii and Simona Sun.<br>
+            ⏰  Time: 2024 September ---- ongoing<br>
+            🍜   Material: Adobe AI, Adobe PS，kitchen, passion  <br> <br>
+            Simona and I cook almost every day in our rented apartment in Manhattan 15th steet. 
+            We’ve spent a lot of time preparing the ingredients, cook, styling the dish and taking pictures.
+             There was one day, we went to the Parsons Communication Design lecture given by Braulio Amado, 
+             whose GOOD ROOM BAD ROOM project inspired us so much that we decided to start making 
+             a piece of graphic design every day after we cooked, based on what we cooked. 
+      </h2>
+          </div>
+      
+        </div>
+        <img src="invitation.jpg" >
+
+
+     
+        
+        
+
+
+    </div> 
+ 
+      
+    </div>
+
+
+
+    
+
+  </div>
+</body>
+
+<script>
+
+// Handle direct tab clicks for tabs without dropdowns
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+document.querySelectorAll('.mode').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const link = tab.getAttribute('data-link');
+    if (link) {
+      window.location.href = link;
+    }
+  });
+});
+
+
+
+// Add a click event listener to the button
+document.getElementById('refreshButton').addEventListener('click', function() {
+      location.reload(); // Refresh the page
+    });
+         
+</script>
+
+</html>
